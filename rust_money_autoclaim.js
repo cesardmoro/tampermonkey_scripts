@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Rust Money Autoclaim
-// @namespace    http://tampermonkey.net/
-// @version      0.1
-// @description  try to take over the world!
-// @author       You
+// @namespace    https://github.com/cesardmoro/tampermonkey_scripts
+// @version      1.1
+// @description  Auto claim para rustmoney.com
+// @author       Cesar Daniel Moro
 // @match        https://rustmoney.com/free
 // @grant        none
 // ==/UserScript==
@@ -13,7 +13,9 @@
     var intervalClaim = false;
 
     function claim(){
-        $('.btn.btn-green.nick-daily').trigger('click');
+        if(!($('.btn.btn-green.nick-daily').is(':disabled'))){
+            $('.btn.btn-green.nick-daily').trigger('click');
+        }
     }
     function stopClaim(){
        $('#stopClaim').hide();
@@ -21,11 +23,11 @@
         clearInterval(intervalClaim);
     }
     function startClaim(btn){
-       alert('se arranca el auto claim, se ejecuta 1 ves por minuto pulse stop para frenarlo');
+       alert('AutoClaim habilitado');
        $('#startClaim').hide();
        $('#stopClaim').show();
         claim();
-       intervalClaim = setInterval(claim, 60000);
+       intervalClaim = setInterval(claim, 10000);
     }
 
     function run(){
